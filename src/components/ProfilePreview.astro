@@ -1,5 +1,16 @@
 ---
 import ImagePlaceholder from "./ImagePlaceholder.astro";
+
+const codeLines = [
+	'<span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">div</span> <span class="text-emerald-400">class</span>=<span class="text-amber-300">"card"</span><span class="text-slate-500">&gt;</span>',
+	'  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">img</span> <span class="text-emerald-400">src</span>=<span class="text-amber-300">"{{avatar_github}}"</span> <span class="text-slate-500">/&gt;</span>',
+	'  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">h1</span><span class="text-slate-500">&gt;</span>{{nombre}}<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">h1</span><span class="text-slate-500">&gt;</span>',
+	'  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">p</span><span class="text-slate-500">&gt;</span>💻 Dev desde LATAM<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">p</span><span class="text-slate-500">&gt;</span>',
+	'  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">div</span> <span class="text-emerald-400">class</span>=<span class="text-amber-300">"stats"</span><span class="text-slate-500">&gt;</span>',
+	"    {{repos}} repos · {{stars}} ⭐ · {{lenguaje_top}}",
+	'  <span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">div</span><span class="text-slate-500">&gt;</span>',
+	'<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">div</span><span class="text-slate-500">&gt;</span>',
+];
 ---
 
 <section class="mx-auto max-w-6xl px-6 py-20">
@@ -18,14 +29,12 @@ import ImagePlaceholder from "./ImagePlaceholder.astro";
 				<span class="h-3 w-3 rounded-full bg-green-500/70"></span>
 				<span class="ml-2 text-xs text-slate-500">perfil.html</span>
 			</div>
-			<pre class="overflow-x-auto p-5 text-[13px] leading-relaxed"><code><span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">div</span> <span class="text-emerald-400">class</span>=<span class="text-amber-300">"card"</span><span class="text-slate-500">&gt;</span>
-  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">img</span> <span class="text-emerald-400">src</span>=<span class="text-amber-300">"{`{{avatar_github}}`}"</span> <span class="text-slate-500">/&gt;</span>
-  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">h1</span><span class="text-slate-500">&gt;</span>{`{{nombre}}`}<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">h1</span><span class="text-slate-500">&gt;</span>
-  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">p</span><span class="text-slate-500">&gt;</span>💻 Dev desde LATAM<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">p</span><span class="text-slate-500">&gt;</span>
-  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">div</span> <span class="text-emerald-400">class</span>=<span class="text-amber-300">"stats"</span><span class="text-slate-500">&gt;</span>
-    {`{{repos}}`} repos · {`{{stars}}`} ⭐ · {`{{lenguaje_top}}`}
-  <span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">div</span><span class="text-slate-500">&gt;</span>
-<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">div</span><span class="text-slate-500">&gt;</span></code></pre>
+			<pre
+				class="overflow-x-auto p-5 text-[13px] leading-relaxed"
+				data-code-reveal
+			><code>{codeLines.map((line) => (
+				<Fragment><span class="block" data-code-line set:html={line} />{"\n"}</Fragment>
+			))}</code></pre>
 		</div>
 
 		<div class="flex items-center justify-center bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(16,185,129,0.12),transparent)] p-8">
@@ -42,3 +51,29 @@ import ImagePlaceholder from "./ImagePlaceholder.astro";
 		</div>
 	</div>
 </section>
+
+<script>
+	import gsap from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	document.querySelectorAll<HTMLElement>("pre[data-code-reveal]").forEach((group) => {
+		if (prefersReducedMotion) return;
+		const lines = group.querySelectorAll<HTMLElement>("[data-code-line]");
+		gsap.fromTo(
+			lines,
+			{ opacity: 0, x: -12 },
+			{
+				opacity: 1,
+				x: 0,
+				duration: 0.35,
+				ease: "power2.out",
+				stagger: 0.08,
+				scrollTrigger: { trigger: group, start: "top 75%" },
+			}
+		);
+	});
+</script>

@@ -29,9 +29,9 @@ const examples = [
 		</p>
 	</div>
 
-	<div class="grid gap-6 sm:grid-cols-2">
-		{examples.map((example, i) => (
-			<div data-reveal style={`transition-delay: ${(i % 2) * 100}ms`}>
+	<div class="grid gap-6 sm:grid-cols-2" data-reveal-group>
+		{examples.map((example) => (
+			<div class="tilt-card" data-reveal-item>
 				<ImagePlaceholder label={example.title} ratio="aspect-[4/3]" />
 				<h3 class="mt-4 font-semibold text-white">{example.title}</h3>
 				<p class="mt-1 text-sm text-slate-400">{example.description}</p>

@@ -58,12 +58,11 @@ const icons: Record<string, string> = {
 		</p>
 	</div>
 
-	<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-		{features.map((feature, i) => (
+	<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-reveal-group>
+		{features.map((feature) => (
 			<div
-				class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-white/20 hover:bg-white/[0.05]"
-				data-reveal
-				style={`transition-delay: ${(i % 3) * 100}ms`}
+				class="tilt-card rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-white/20 hover:bg-white/[0.05]"
+				data-reveal-item
 			>
 				<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400/20 to-fuchsia-400/20">
 					<svg viewBox="0 0 24 24" class="h-5 w-5 fill-emerald-400">

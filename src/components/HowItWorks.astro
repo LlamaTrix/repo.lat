@@ -29,26 +29,73 @@ const steps = [
 ];
 ---
 
-<section id="como-funciona" class="mx-auto max-w-6xl px-6 py-20">
-	<div class="mx-auto mb-14 max-w-2xl text-center" data-reveal>
+<section id="como-funciona" class="mx-auto max-w-4xl px-6 py-20">
+	<div class="mx-auto mb-16 max-w-2xl text-center" data-reveal>
 		<h2 class="text-3xl font-bold text-white sm:text-4xl">Cómo funciona</h2>
 		<p class="mt-4 text-slate-400">Cuatro pasos, sin fricción.</p>
 	</div>
 
-	<div class="grid gap-10 md:grid-cols-2">
-		{steps.map((step, i) => (
-			<div class="flex gap-5" data-reveal style={`transition-delay: ${(i % 2) * 100}ms`}>
-				<ImagePlaceholder label={`Paso ${step.number}`} ratio="aspect-square" class="h-20 w-20 shrink-0" />
-				<div>
-					<span
-						class="mb-1 block bg-gradient-to-r from-emerald-400 to-fuchsia-400 bg-clip-text text-2xl font-extrabold text-transparent"
+	<div id="timeline" class="relative">
+		<div class="absolute top-0 bottom-0 left-9 w-px bg-white/10 sm:left-10"></div>
+		<div
+			id="timeline-fill"
+			class="absolute top-0 left-9 w-px origin-top scale-y-0 bg-gradient-to-b from-emerald-400 via-cyan-400 to-fuchsia-400 sm:left-10"
+		>
+		</div>
+
+		<div class="space-y-14">
+			{steps.map((step) => (
+				<div class="relative flex gap-6 pl-[4.75rem] sm:gap-8 sm:pl-24" data-reveal>
+					<div
+						class="timeline-marker absolute top-0 left-0 flex h-[3.25rem] w-[3.25rem] shrink-0 items-center justify-center rounded-full border border-white/15 bg-[#0d0d16] text-sm font-bold text-white sm:h-20 sm:w-20"
 					>
 						{step.number}
-					</span>
-					<h3 class="mb-2 text-lg font-semibold text-white">{step.title}</h3>
-					<p class="text-sm leading-relaxed text-slate-400">{step.description}</p>
+					</div>
+					<div class="flex flex-1 flex-col gap-4 sm:flex-row sm:items-center">
+						<ImagePlaceholder label={step.title} ratio="aspect-square" class="h-16 w-16 shrink-0" />
+						<div>
+							<h3 class="mb-1 text-lg font-semibold text-white">{step.title}</h3>
+							<p class="text-sm leading-relaxed text-slate-400">{step.description}</p>
+						</div>
+					</div>
 				</div>
-			</div>
-		))}
+			))}
+		</div>
 	</div>
 </section>
+
+<script>
+	import gsap from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	const fill = document.getElementById("timeline-fill");
+	const timeline = document.getElementById("timeline");
+
+	if (fill && timeline && !prefersReducedMotion) {
+		gsap.to(fill, {
+			scaleY: 1,
+			ease: "none",
+			scrollTrigger: {
+				trigger: timeline,
+				start: "top 60%",
+				end: "bottom 70%",
+				scrub: 0.5,
+			},
+		});
+	}
+
+	document.querySelectorAll<HTMLElement>(".timeline-marker").forEach((marker) => {
+		if (prefersReducedMotion) return;
+		gsap.to(marker, {
+			borderColor: "rgba(52,211,153,0.8)",
+			scrollTrigger: {
+				trigger: marker,
+				start: "top 65%",
+				toggleActions: "play none none reverse",
+			},
+		});
+	});
+</script>
