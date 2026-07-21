@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://repo.lat/sitemap-index.xml

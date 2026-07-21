@@ -1,0 +1,31 @@
+---
+const navLinks = [
+	{ href: "#caracteristicas", label: "Características" },
+	{ href: "#como-funciona", label: "Cómo funciona" },
+	{ href: "https://github.com/LlamaTrix/repo.lat", label: "GitHub" },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a12]/80 backdrop-blur-md">
+	<div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+		<a href="#" class="flex items-center gap-2 text-lg font-bold text-white">
+			<span class="text-emerald-400">&lt;/&gt;</span>
+			repo<span class="text-fuchsia-400">.lat</span>
+		</a>
+
+		<nav class="hidden items-center gap-8 text-sm font-medium text-slate-300 md:flex">
+			{navLinks.map((link) => (
+				<a href={link.href} class="transition-colors hover:text-white">
+					{link.label}
+				</a>
+			))}
+		</nav>
+
+		<a
+			href="#conectar"
+			class="rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#0a0a12] transition hover:bg-slate-200"
+		>
+			Conectar con GitLab
+		</a>
+	</div>
+</header>

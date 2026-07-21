@@ -1,0 +1,60 @@
+---
+const features = [
+	{
+		title: "Login con GitLab",
+		description:
+			"Conecta tu cuenta de GitLab en un clic. Importamos tus repos, contribuciones y actividad automáticamente.",
+		icon: "gitlab",
+	},
+	{
+		title: "Perfil compartible",
+		description:
+			"Obtén una URL propia (repo.lat/tu-usuario) lista para poner en tu CV, LinkedIn o bio de redes.",
+		icon: "share",
+	},
+	{
+		title: "HTML 100% personalizable",
+		description:
+			"Edita el HTML y CSS de tu perfil directamente. Sin límites de plantilla: tu perfil se ve como tú quieras.",
+		icon: "code",
+	},
+	{
+		title: "Open source, por LATAM",
+		description:
+			"Todo el código es público y auditable. Un proyecto construido en comunidad para la comunidad developer de Latinoamérica.",
+		icon: "heart",
+	},
+];
+
+const icons: Record<string, string> = {
+	gitlab:
+		"M22.65 10.9 21.75 8.1a.32.32 0 0 0-.03-.07l-1.72-5.3a.66.66 0 0 0-1.26 0L17.02 8H6.98L5.26 2.73a.66.66 0 0 0-1.26 0L2.28 8a.32.32 0 0 0-.03.07L1.35 10.9a1.13 1.13 0 0 0 .41 1.27L12 19.5l10.24-7.33a1.13 1.13 0 0 0 .41-1.27Z",
+	share: "M13 5.5a3.5 3.5 0 1 1 1.06 2.5l-6.19 3.5a3.5 3.5 0 0 1 0 1l6.19 3.5a3.5 3.5 0 1 1-.98 1.74l-6.19-3.5a3.5 3.5 0 1 1 0-4.48l6.19-3.5A3.5 3.5 0 0 1 13 5.5Z",
+	code: "M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6z",
+	heart:
+		"M12 21s-6.7-4.35-9.33-8.2C.9 10.24 1.4 6.9 4.2 5.3c2.2-1.25 4.7-.6 6.1 1.2.5.65.9 1.3 1.7 1.3s1.2-.65 1.7-1.3c1.4-1.8 3.9-2.45 6.1-1.2 2.8 1.6 3.3 4.94 1.53 7.5C18.7 16.65 12 21 12 21Z",
+};
+---
+
+<section id="caracteristicas" class="mx-auto max-w-6xl px-6 py-20">
+	<div class="mx-auto mb-14 max-w-2xl text-center">
+		<h2 class="text-3xl font-bold text-white sm:text-4xl">Todo lo que necesitas para brillar</h2>
+		<p class="mt-4 text-slate-400">
+			Un perfil de desarrollador que refleja tu trabajo real, no una plantilla genérica.
+		</p>
+	</div>
+
+	<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+		{features.map((feature) => (
+			<div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-white/20 hover:bg-white/[0.05]">
+				<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400/20 to-fuchsia-400/20">
+					<svg viewBox="0 0 24 24" class="h-5 w-5 fill-emerald-400">
+						<path d={icons[feature.icon]}></path>
+					</svg>
+				</div>
+				<h3 class="mb-2 font-semibold text-white">{feature.title}</h3>
+				<p class="text-sm leading-relaxed text-slate-400">{feature.description}</p>
+			</div>
+		))}
+	</div>
+</section>
