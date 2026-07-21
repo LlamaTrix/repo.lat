@@ -1,18 +1,22 @@
 ---
 import ImagePlaceholder from "./ImagePlaceholder.astro";
-
-const line1Words = ["Tu", "perfil", "de", "dev,"];
-const line2Words = ["directo", "desde", "GitHub"];
 ---
 
-<section class="relative overflow-hidden px-6 pt-20 pb-24">
+<section id="hero" class="relative overflow-hidden px-6 pt-20 pb-24">
 	<div
 		id="hero-glow-1"
 		class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_-10%,rgba(168,85,247,0.25),transparent)]"
 	>
 	</div>
 	<div
+		id="hero-grid"
 		class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]"
+	>
+	</div>
+	<div
+		id="hero-spotlight"
+		class="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-300"
+		style="background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 30%), rgba(16,185,129,0.12), transparent 70%);"
 	>
 	</div>
 
@@ -25,19 +29,13 @@ const line2Words = ["directo", "desde", "GitHub"];
 			Open source · hecho por la comunidad LATAM
 		</div>
 
-		<h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
-			{line1Words.map((word) => (
-				<span class="inline-block overflow-hidden pb-1 align-bottom">
-					<span class="hero-word inline-block">{word}&nbsp;</span>
-				</span>
-			))}
-			<br />
-			<span class="bg-gradient-to-r from-emerald-400 via-cyan-400 to-fuchsia-400 bg-clip-text text-transparent">
-				{line2Words.map((word) => (
-					<span class="inline-block overflow-hidden pb-1 align-bottom">
-						<span class="hero-word inline-block">{word}&nbsp;</span>
-					</span>
-				))}
+		<h1 class="text-4xl leading-tight font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+			<span id="hero-line1" class="block">Tu perfil de dev,</span>
+			<span
+				id="hero-line2"
+				class="block bg-gradient-to-r from-emerald-400 via-cyan-400 to-fuchsia-400 bg-clip-text text-transparent"
+			>
+				directo desde GitHub
 			</span>
 		</h1>
 
@@ -51,13 +49,13 @@ const line2Words = ["directo", "desde", "GitHub"];
 		<div id="hero-ctas" class="mt-10 flex flex-col items-center justify-center gap-4 opacity-0 sm:flex-row">
 			<a
 				href="#conectar"
-				class="magnetic-btn w-full rounded-full bg-gradient-to-r from-emerald-400 to-fuchsia-400 px-7 py-3.5 text-sm font-bold text-[#0a0a12] transition hover:opacity-90 sm:w-auto"
+				class="magnetic-btn ripple w-full rounded-full bg-gradient-to-r from-emerald-400 to-fuchsia-400 px-7 py-3.5 text-sm font-bold text-[#0a0a12] transition hover:opacity-90 sm:w-auto"
 			>
 				Conectar con GitHub
 			</a>
 			<a
 				href="https://github.com/LlamaTrix/repo.lat"
-				class="magnetic-btn w-full rounded-full border border-white/15 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/5 sm:w-auto"
+				class="magnetic-btn ripple w-full rounded-full border border-white/15 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/5 sm:w-auto"
 			>
 				⭐ Ver código en GitHub
 			</a>
@@ -72,21 +70,40 @@ const line2Words = ["directo", "desde", "GitHub"];
 <script>
 	import gsap from "gsap";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 
-	gsap.registerPlugin(ScrollTrigger);
+	gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 
 	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	const line1 = document.getElementById("hero-line1");
+	const line2 = document.getElementById("hero-line2");
 
 	if (prefersReducedMotion) {
 		document.querySelectorAll("#hero-badge, #hero-copy, #hero-ctas").forEach((el) => {
 			(el as HTMLElement).style.opacity = "1";
 		});
 	} else {
-		gsap
-			.timeline({ defaults: { ease: "power4.out" } })
-			.fromTo(".hero-word", { yPercent: 120 }, { yPercent: 0, duration: 0.9, stagger: 0.045 })
-			.to("#hero-badge", { opacity: 1, duration: 0.5 }, "-=0.7")
-			.to("#hero-copy", { opacity: 1, duration: 0.6 }, "-=0.6")
+		const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+		if (line1 && line2) {
+			const text1 = line1.textContent ?? "";
+			const text2 = line2.textContent ?? "";
+			tl.to(line1, {
+				duration: 1,
+				scrambleText: { text: text1, chars: "upperCase", speed: 0.4, revealDelay: 0.15 },
+			}).to(
+				line2,
+				{
+					duration: 1.1,
+					scrambleText: { text: text2, chars: "01</>{}#", speed: 0.35, revealDelay: 0.2 },
+				},
+				"-=0.6"
+			);
+		}
+
+		tl.to("#hero-badge", { opacity: 1, duration: 0.5 }, "-=0.9")
+			.to("#hero-copy", { opacity: 1, duration: 0.6 }, "-=0.7")
 			.to("#hero-ctas", { opacity: 1, duration: 0.6 }, "-=0.5");
 
 		const glow = document.getElementById("hero-glow-1");
@@ -102,5 +119,19 @@ const line2Words = ["directo", "desde", "GitHub"];
 				},
 			});
 		}
+	}
+
+	const heroSection = document.getElementById("hero");
+	const spotlight = document.getElementById("hero-spotlight");
+	if (heroSection && spotlight && window.matchMedia("(pointer: fine)").matches) {
+		heroSection.addEventListener("mousemove", (e) => {
+			const rect = heroSection.getBoundingClientRect();
+			spotlight.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+			spotlight.style.setProperty("--my", `${e.clientY - rect.top}px`);
+			spotlight.style.opacity = "1";
+		});
+		heroSection.addEventListener("mouseleave", () => {
+			spotlight.style.opacity = "0";
+		});
 	}
 </script>

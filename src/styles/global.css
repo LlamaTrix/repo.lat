@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+html,
+body {
+	overflow-x: hidden;
+	max-width: 100vw;
+}
+
 html.lenis {
 	height: auto;
 }
@@ -18,9 +24,82 @@ html.lenis.lenis-smooth {
 
 .magnetic-btn {
 	will-change: transform;
+	position: relative;
+	overflow: hidden;
 }
 
 .tilt-card {
 	will-change: transform;
 	transform-style: preserve-3d;
+	position: relative;
+}
+
+.tilt-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: radial-gradient(
+		220px circle at var(--mx, 50%) var(--my, 50%),
+		rgba(52, 211, 153, 0.15),
+		transparent 70%
+	);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	pointer-events: none;
+}
+
+.tilt-card:hover::before {
+	opacity: 1;
+}
+
+.ripple-circle {
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	margin-left: -6px;
+	margin-top: -6px;
+	border-radius: 9999px;
+	background: rgba(255, 255, 255, 0.5);
+	pointer-events: none;
+}
+
+.cursor-dot,
+.cursor-ring {
+	position: fixed;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	z-index: 9999;
+	border-radius: 9999px;
+	transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+	width: 6px;
+	height: 6px;
+	background: #34d399;
+}
+
+.cursor-ring {
+	width: 32px;
+	height: 32px;
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	transition:
+		width 0.25s ease,
+		height 0.25s ease,
+		border-color 0.25s ease;
+}
+
+.cursor-ring--active {
+	width: 52px;
+	height: 52px;
+	border-color: rgba(52, 211, 153, 0.7);
+}
+
+@media (pointer: coarse) {
+	.cursor-dot,
+	.cursor-ring {
+		display: none !important;
+	}
 }

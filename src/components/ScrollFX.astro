@@ -6,6 +6,9 @@
 	</div>
 </div>
 
+<div id="cursor-dot" class="cursor-dot hidden"></div>
+<div id="cursor-ring" class="cursor-ring hidden"></div>
+
 <script>
 	import gsap from "gsap";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -55,7 +58,12 @@
 				y: 0,
 				duration: 0.8,
 				ease: "power3.out",
-				scrollTrigger: { trigger: el, start: "top 85%" },
+				scrollTrigger: {
+					trigger: el,
+					start: "top 85%",
+					end: "bottom top",
+					toggleActions: "play none none reverse",
+				},
 			}
 		);
 	});
@@ -73,7 +81,12 @@
 				duration: 0.7,
 				ease: "power3.out",
 				stagger: 0.12,
-				scrollTrigger: { trigger: group, start: "top 80%" },
+				scrollTrigger: {
+					trigger: group,
+					start: "top 80%",
+					end: "bottom top",
+					toggleActions: "play none none reverse",
+				},
 			}
 		);
 	});
@@ -90,6 +103,8 @@
 				const py = (e.clientY - rect.top) / rect.height - 0.5;
 				rotateY(px * 14);
 				rotateX(py * -14);
+				card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+				card.style.setProperty("--my", `${e.clientY - rect.top}px`);
 			});
 			card.addEventListener("mouseleave", () => {
 				rotateX(0);
@@ -111,5 +126,53 @@
 				y(0);
 			});
 		});
+
+		document.querySelectorAll<HTMLElement>(".ripple").forEach((btn) => {
+			btn.addEventListener("click", (e) => {
+				const rect = btn.getBoundingClientRect();
+				const circle = document.createElement("span");
+				circle.className = "ripple-circle";
+				circle.style.left = `${e.clientX - rect.left}px`;
+				circle.style.top = `${e.clientY - rect.top}px`;
+				btn.appendChild(circle);
+				gsap.fromTo(
+					circle,
+					{ scale: 0, opacity: 0.5 },
+					{
+						scale: 4,
+						opacity: 0,
+						duration: 0.7,
+						ease: "power2.out",
+						onComplete: () => circle.remove(),
+					}
+				);
+			});
+		});
+	}
+
+	if (!prefersReducedMotion && window.matchMedia("(pointer: fine)").matches) {
+		const dot = document.getElementById("cursor-dot");
+		const ring = document.getElementById("cursor-ring");
+		if (dot && ring) {
+			dot.classList.remove("hidden");
+			ring.classList.remove("hidden");
+
+			const dotX = gsap.quickTo(dot, "x", { duration: 0.12, ease: "power3.out" });
+			const dotY = gsap.quickTo(dot, "y", { duration: 0.12, ease: "power3.out" });
+			const ringX = gsap.quickTo(ring, "x", { duration: 0.35, ease: "power3.out" });
+			const ringY = gsap.quickTo(ring, "y", { duration: 0.35, ease: "power3.out" });
+
+			window.addEventListener("mousemove", (e) => {
+				dotX(e.clientX);
+				dotY(e.clientY);
+				ringX(e.clientX);
+				ringY(e.clientY);
+			});
+
+			document.querySelectorAll("a, button, .tilt-card, summary").forEach((el) => {
+				el.addEventListener("mouseenter", () => ring.classList.add("cursor-ring--active"));
+				el.addEventListener("mouseleave", () => ring.classList.remove("cursor-ring--active"));
+			});
+		}
 	}
 </script>
