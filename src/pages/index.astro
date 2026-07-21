@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import Features from "../components/Features.astro";
-import Showcase from "../components/Showcase.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import ProfilePreview from "../components/ProfilePreview.astro";
 import Comparison from "../components/Comparison.astro";
@@ -11,18 +10,19 @@ import FAQ from "../components/FAQ.astro";
 import CTA from "../components/CTA.astro";
 import Footer from "../components/Footer.astro";
 import ScrollFX from "../components/ScrollFX.astro";
+import LatamBackdrop from "../components/LatamBackdrop.astro";
 ---
 
 <Layout>
-	<div class="min-h-screen bg-[#0a0a12] text-white antialiased">
+	<div class="relative min-h-screen bg-[#0a0a12] text-white antialiased">
 		<ScrollFX />
+		<LatamBackdrop />
 		<Header />
-		<main>
+		<main class="relative z-10">
 			<Hero />
 			<Features />
 			<ProfilePreview />
 			<HowItWorks />
-			<Showcase />
 			<Comparison />
 			<FAQ />
 			<CTA />

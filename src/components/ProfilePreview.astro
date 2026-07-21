@@ -1,4 +1,5 @@
 ---
+import LatamIcon from "./LatamIcon.astro";
 const codeLines = [
 	'<span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">main</span> <span class="text-emerald-400">class</span>=<span class="text-amber-300">"perfil"</span><span class="text-slate-500">&gt;</span>',
 	'  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">h1</span><span class="text-slate-500">&gt;</span>{{ nombre }}<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">h1</span><span class="text-slate-500">&gt;</span>',
@@ -8,7 +9,9 @@ const codeLines = [
 	'<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">main</span><span class="text-slate-500">&gt;</span>',
 ];
 ---
-<section class="mx-auto max-w-6xl px-6 py-24">
+<section class="relative mx-auto max-w-6xl px-6 py-24">
+	<LatamIcon icon={1} class="pointer-events-none absolute -right-10 top-6 hidden h-36 w-36 rotate-12 opacity-25 lg:block" />
+	<LatamIcon icon={4} class="pointer-events-none absolute -bottom-4 -left-12 hidden h-28 w-28 -rotate-12 opacity-20 lg:block" />
 	<div class="grid items-center gap-12 lg:grid-cols-[.85fr_1.15fr]">
 		<div data-reveal>
 			<p class="mb-3 text-xs font-semibold uppercase tracking-[.2em] text-cyan-300">Tu espacio en la web</p>

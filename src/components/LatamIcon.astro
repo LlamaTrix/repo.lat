@@ -1,0 +1,12 @@
+---
+interface Props { icon: 0 | 1 | 2 | 3 | 4 | 5; class?: string; decorative?: boolean; label?: string; }
+const { icon, class: className = "", decorative = true, label } = Astro.props;
+const col = icon % 3;
+const row = Math.floor(icon / 3);
+---
+<span class:list={["latam-icon", className]} aria-hidden={decorative ? "true" : undefined} role={!decorative ? "img" : undefined} aria-label={!decorative ? label : undefined}>
+	<img src="/images/latam-icon-atlas.webp" alt="" loading="lazy" style={`left:-${col * 100}%;top:-${row * 100}%`} />
+</span>
+<style>
+	.latam-icon{display:inline-block;position:relative;overflow:hidden;aspect-ratio:1;flex:none}.latam-icon img{position:absolute;width:300%;max-width:none;height:200%;object-fit:fill}
+</style>

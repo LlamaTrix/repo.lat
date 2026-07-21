@@ -1,0 +1,31 @@
+<div id="latam-backdrop" class="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+	<svg class="latam-map latam-map--one" viewBox="0 0 360 720" fill="none">
+		<path class="map-outline" d="M80 30 42 72l18 54-34 49 35 54 5 73 42 48 17 80 30 42 14 74 33 84 26-21-2-70 30-52-4-76 38-72-8-51 44-55-13-62-50-9-27-66-64-6-34-45Z" />
+		<path class="route route--a" d="M70 112C161 174 88 299 188 367s-17 156 42 220" />
+		<path class="route route--b" d="M54 252c94-43 120 57 215 23" />
+		<g class="nodes"><circle cx="70" cy="112" r="5"/><circle cx="112" cy="286" r="4"/><circle cx="188" cy="367" r="5"/><circle cx="230" cy="587" r="4"/><circle cx="269" cy="275" r="5"/></g>
+	</svg>
+	<svg class="latam-map latam-map--two" viewBox="0 0 360 720" fill="none">
+		<path class="map-outline" d="M80 30 42 72l18 54-34 49 35 54 5 73 42 48 17 80 30 42 14 74 33 84 26-21-2-70 30-52-4-76 38-72-8-51 44-55-13-62-50-9-27-66-64-6-34-45Z" />
+		<path class="route route--c" d="M67 90c133 81 45 227 166 303 52 33-12 131 8 187" />
+		<g class="nodes"><circle cx="67" cy="90" r="4"/><circle cx="154" cy="279" r="5"/><circle cx="233" cy="393" r="4"/><circle cx="241" cy="580" r="5"/></g>
+	</svg>
+	<div class="signal signal--one"></div><div class="signal signal--two"></div><div class="signal signal--three"></div>
+</div>
+
+<style>
+	.latam-map{position:absolute;width:min(33vw,390px);opacity:.11;filter:drop-shadow(0 0 22px rgba(52,211,153,.18));transform:translate3d(var(--bg-x,0),var(--bg-y,0),0)}
+	.latam-map--one{right:-7rem;top:34rem}.latam-map--two{left:-9rem;top:128rem;transform:translate3d(calc(var(--bg-x,0) * -.6),calc(var(--bg-y,0) * -.6),0) scale(.8);opacity:.07}
+	.map-outline{stroke:#5eead4;stroke-width:1.5;stroke-dasharray:5 8}.route{stroke-width:1.5;stroke-linecap:round;stroke-dasharray:10 12;animation:route-flow 14s linear infinite}.route--a{stroke:#e879f9}.route--b{stroke:#22d3ee;animation-duration:10s}.route--c{stroke:#5eead4;animation-duration:18s}.nodes circle{fill:#fff;transform-box:fill-box;transform-origin:center;animation:node-pulse 4s ease-in-out infinite}.nodes circle:nth-child(2n){fill:#e879f9;animation-delay:-2s}.nodes circle:nth-child(3n){fill:#22d3ee;animation-delay:-1s}
+	.signal{position:absolute;width:5px;height:5px;border-radius:50%;background:#5eead4;opacity:.16;box-shadow:0 0 0 0 rgba(94,234,212,.25);animation:signal 5s ease-out infinite}.signal--one{left:18%;top:18%}.signal--two{right:16%;top:52%;animation-delay:-2s}.signal--three{left:30%;top:76%;animation-delay:-3.5s}
+	@keyframes route-flow{to{stroke-dashoffset:-220}}@keyframes node-pulse{50%{transform:scale(1.8);opacity:.35}}@keyframes signal{60%,100%{box-shadow:0 0 0 70px transparent;opacity:0}}
+	@media(max-width:700px){.latam-map{width:230px;opacity:.07}.latam-map--one{right:-7rem}.latam-map--two{left:-8rem}}
+	@media(prefers-reduced-motion:reduce){.route,.nodes circle,.signal{animation:none}.latam-map{transform:none}}
+</style>
+
+<script>
+	const backdrop=document.getElementById("latam-backdrop");
+	if(backdrop && matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)").matches){
+		window.addEventListener("pointermove",(event)=>{const x=(event.clientX/innerWidth-.5)*10;const y=(event.clientY/innerHeight-.5)*10;backdrop.style.setProperty("--bg-x",`${x}px`);backdrop.style.setProperty("--bg-y",`${y}px`)},{passive:true});
+	}
+</script>
