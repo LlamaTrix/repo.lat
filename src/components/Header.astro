@@ -1,10 +1,9 @@
 ---
-import LatamIcon from "./LatamIcon.astro";
 const navLinks = [{ href: "#caracteristicas", label: "Qué ofrece" }, { href: "#como-funciona", label: "Cómo funciona" }, { href: "#preguntas", label: "Preguntas" }];
 ---
 <header id="site-header" class="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a12]/80 py-4 backdrop-blur-md transition-[padding] duration-300">
 	<div class="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6">
-		<a href="#hero" class="flex items-center gap-2 text-lg font-bold text-white"><LatamIcon icon={0} class="h-8 w-8" /><span>repo<span class="text-fuchsia-400">.lat</span></span></a>
+		<a href="#hero" class="text-lg font-bold text-white"><span class="text-emerald-300">&lt;/&gt;</span> repo<span class="text-fuchsia-400">.lat</span></a>
 		<nav class="hidden items-center gap-7 text-sm text-slate-300 md:flex">{navLinks.map((link) => <a href={link.href} class="transition hover:text-white">{link.label}</a>)}</nav>
 		<div class="flex items-center gap-2"><a href="#conectar" class="magnetic-btn rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#0a0a12] transition hover:bg-emerald-200"><span class="hidden sm:inline">Quiero mi perfil</span><span class="sm:hidden">Empezar</span></a><button id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" class="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-white md:hidden"><span>≡</span></button></div>
 	</div>

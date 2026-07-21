@@ -1,15 +1,14 @@
 ---
-import LatamIcon from "./LatamIcon.astro";
 const features = [
-	{ mark: "01", title: "Tu trabajo, al día", description: "Cuando tu GitHub cambia, tu perfil también. Sin copiar cifras ni actualizar listas a mano." },
-	{ mark: "02", title: "Solo lo que te representa", description: "No todos los repositorios merecen el mismo lugar. Elige qué enseñar y en qué orden." },
-	{ mark: "03", title: "Código que puedes tocar", description: "El HTML y el CSS son tuyos. Cambia una tipografía o replantea toda la página." },
-	{ mark: "04", title: "Un enlace fácil de compartir", description: "Una puerta de entrada clara para reclutadores, clientes y otras personas de la comunidad." },
-	{ mark: "05", title: "Abierto de verdad", description: "El código está a la vista. Puedes auditarlo, proponer mejoras o levantar tu propia instancia." },
-	{ mark: "06", title: "Hecho desde aquí", description: "Pensado para la diversidad de trayectorias, ciudades y comunidades tecnológicas de Latinoamérica." },
+	{ title: "Tu trabajo, al día", description: "Cuando tu GitHub cambia, tu perfil también. Sin copiar cifras ni actualizar listas a mano." },
+	{ title: "Solo lo que te representa", description: "No todos los repositorios merecen el mismo lugar. Elige qué enseñar y en qué orden." },
+	{ title: "Código que puedes tocar", description: "El HTML y el CSS son tuyos. Cambia una tipografía o replantea toda la página." },
+	{ title: "Un enlace fácil de compartir", description: "Una puerta de entrada clara para reclutadores, clientes y otras personas de la comunidad." },
+	{ title: "Abierto de verdad", description: "El código está a la vista. Puedes auditarlo, proponer mejoras o levantar tu propia instancia." },
+	{ title: "Hecho desde aquí", description: "Pensado para la diversidad de trayectorias, ciudades y comunidades tecnológicas de Latinoamérica." },
 ];
 ---
 <section id="caracteristicas" class="mx-auto max-w-6xl px-6 py-24">
 	<div class="mx-auto mb-14 max-w-2xl text-center" data-reveal><p class="mb-3 text-xs font-semibold uppercase tracking-[.2em] text-emerald-300">Lo esencial, bien resuelto</p><h2 class="text-3xl font-bold text-white sm:text-5xl">Menos campos que llenar. Más espacio para contar.</h2></div>
-	<div class="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3" data-reveal-group>{features.map((feature, index) => <article class="tilt-card group relative overflow-hidden bg-[#0c0c14] p-7" data-reveal-item><LatamIcon icon={index as 0 | 1 | 2 | 3 | 4 | 5} class="absolute -right-5 -top-5 h-28 w-28 opacity-30 transition duration-500 group-hover:rotate-6 group-hover:scale-110 group-hover:opacity-55" /><span class="relative text-xs font-semibold text-emerald-300">{feature.mark}</span><h3 class="relative mt-14 text-lg font-semibold text-white">{feature.title}</h3><p class="relative mt-2 text-sm leading-relaxed text-slate-400">{feature.description}</p></article>)}</div>
+	<div class="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3" data-reveal-group>{features.map((feature) => <article class="tilt-card relative overflow-hidden bg-[#0c0c14] p-7" data-reveal-item><h3 class="relative text-lg font-semibold text-white">{feature.title}</h3><p class="relative mt-2 text-sm leading-relaxed text-slate-400">{feature.description}</p></article>)}</div>
 </section>

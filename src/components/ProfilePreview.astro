@@ -1,5 +1,4 @@
 ---
-import LatamIcon from "./LatamIcon.astro";
 const codeLines = [
 	'<span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">main</span> <span class="text-emerald-400">class</span>=<span class="text-amber-300">"perfil"</span><span class="text-slate-500">&gt;</span>',
 	'  <span class="text-slate-500">&lt;</span><span class="text-fuchsia-400">h1</span><span class="text-slate-500">&gt;</span>{{ nombre }}<span class="text-slate-500">&lt;/</span><span class="text-fuchsia-400">h1</span><span class="text-slate-500">&gt;</span>',
@@ -10,8 +9,6 @@ const codeLines = [
 ];
 ---
 <section class="relative mx-auto max-w-6xl px-6 py-24">
-	<LatamIcon icon={1} class="pointer-events-none absolute -right-10 top-6 hidden h-36 w-36 rotate-12 opacity-25 lg:block" />
-	<LatamIcon icon={4} class="pointer-events-none absolute -bottom-4 -left-12 hidden h-28 w-28 -rotate-12 opacity-20 lg:block" />
 	<div class="grid items-center gap-12 lg:grid-cols-[.85fr_1.15fr]">
 		<div data-reveal>
 			<p class="mb-3 text-xs font-semibold uppercase tracking-[.2em] text-cyan-300">Tu espacio en la web</p>
@@ -23,10 +20,10 @@ const codeLines = [
 			<div class="flex items-center gap-2 border-b border-white/10 px-4 py-3"><span class="h-2.5 w-2.5 rounded-full bg-fuchsia-400"></span><span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span><span class="h-2.5 w-2.5 rounded-full bg-emerald-300"></span><span class="ml-auto text-xs text-slate-500">perfil.html</span></div>
 			<div class="grid md:grid-cols-2">
 				<pre class="overflow-x-auto p-5 text-[12px] leading-7"><code>{codeLines.map((line) => <Fragment><span class="block" set:html={line} />{"\n"}</Fragment>)}</code></pre>
-				<div class="m-3 rounded-xl bg-[#e7eee8] p-6 text-[#17211b]">
-					<div class="flex items-center gap-3"><div class="grid h-10 w-10 place-items-center rounded-full bg-[#17211b] text-xs font-bold text-emerald-300">CR</div><div><strong class="block">Camila Rojas</strong><span class="text-xs opacity-60">Santiago, Chile</span></div></div>
+				<div class="m-3 rounded-xl bg-[#14141f] p-6 text-white">
+					<div class="flex items-center gap-3"><div class="grid h-10 w-10 place-items-center rounded-full bg-emerald-400/15 text-xs font-bold text-emerald-300">CR</div><div><strong class="block">Camila Rojas</strong><span class="text-xs text-slate-400">Santiago, Chile</span></div></div>
 					<p class="mt-8 text-xl font-bold leading-tight">Construyo productos para la web.</p>
-					<div class="mt-6 grid grid-cols-2 gap-2 text-[10px]"><span class="rounded border border-black/10 p-2">42 repositorios</span><span class="rounded border border-black/10 p-2">TypeScript</span></div>
+					<div class="mt-6 grid grid-cols-2 gap-2 text-[10px] text-slate-300"><span class="rounded border border-white/10 p-2">42 repositorios</span><span class="rounded border border-white/10 p-2">TypeScript</span></div>
 				</div>
 			</div>
 		</div>
