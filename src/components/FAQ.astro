@@ -1,51 +1,13 @@
 ---
 const faqs = [
-	{
-		q: "¿Necesito saber diseño para personalizar mi perfil?",
-		a: "No. Te damos una plantilla base lista para usar. Si sabes HTML/CSS puedes ir tan lejos como quieras; si no, la plantilla por defecto ya se ve bien.",
-	},
-	{
-		q: "¿Es gratis?",
-		a: "Sí, repo.lat es y seguirá siendo gratuito y open source.",
-	},
-	{
-		q: "¿Puedo usar mi propio dominio?",
-		a: "Está en el roadmap. Por ahora cada perfil vive en repo.lat/tu-usuario.",
-	},
-	{
-		q: "¿Qué permisos le doy a GitHub al conectar mi cuenta?",
-		a: "Solo lectura sobre tu información pública (perfil, repos, contribuciones). Nunca pedimos tu contraseña ni permisos de escritura.",
-	},
-	{
-		q: "¿De verdad es open source?",
-		a: "Sí, todo el código vive en GitHub. Puedes revisarlo, reportar issues o contribuir directamente.",
-	},
-	{
-		q: "¿Cuándo puedo conectar mi cuenta?",
-		a: "El proyecto está en construcción activa. El botón 'Conectar con GitHub' estará disponible muy pronto — síguenos en GitHub para no perderte el lanzamiento.",
-	},
+	{ q: "¿Tengo que saber diseño?", a: "No. Empiezas con una base cuidada y funcional. Si sabes HTML y CSS, puedes cambiarla por completo; si no, tu perfil ya queda listo para compartir." },
+	{ q: "¿Cuánto cuesta?", a: "Nada. repo.lat es gratuito y su código es abierto." },
+	{ q: "¿Qué permisos usa de GitHub?", a: "Solo lectura de información pública: tu perfil, repositorios y actividad. Nunca pedimos tu contraseña ni permisos para modificar código." },
+	{ q: "¿Puedo revisar el código?", a: "Sí. El proyecto vive en GitHub: puedes leerlo, abrir un issue o aportar una mejora." },
+	{ q: "¿Cuándo podré conectar mi cuenta?", a: "Estamos terminando la primera versión pública. Sigue el repositorio para enterarte cuando abramos el acceso." },
 ];
 ---
-
-<section id="preguntas" class="mx-auto max-w-3xl px-6 py-20">
-	<div class="mx-auto mb-14 max-w-2xl text-center" data-reveal>
-		<h2 class="text-3xl font-bold text-white sm:text-4xl">Preguntas frecuentes</h2>
-	</div>
-
-	<div class="space-y-3" data-reveal>
-		{faqs.map((faq) => (
-			<details class="group rounded-xl border border-white/10 bg-white/[0.03] p-5 open:bg-white/[0.05]">
-				<summary class="flex cursor-pointer list-none items-center justify-between font-medium text-white">
-					{faq.q}
-					<svg
-						viewBox="0 0 24 24"
-						class="h-5 w-5 shrink-0 fill-slate-400 transition-transform duration-300 group-open:rotate-45"
-					>
-						<path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6Z"></path>
-					</svg>
-				</summary>
-				<p class="mt-3 text-sm leading-relaxed text-slate-400">{faq.a}</p>
-			</details>
-		))}
-	</div>
+<section id="preguntas" class="mx-auto max-w-3xl px-6 py-24">
+	<div class="mb-12" data-reveal><p class="mb-3 text-xs font-semibold uppercase tracking-[.2em] text-emerald-300">Sin letra pequeña</p><h2 class="text-3xl font-bold text-white sm:text-4xl">Lo que quizá quieras saber</h2></div>
+	<div class="space-y-3" data-reveal>{faqs.map((faq) => <details class="group rounded-xl border border-white/10 bg-white/[.03] p-5 open:bg-white/[.05]"><summary class="flex cursor-pointer list-none items-center justify-between font-medium text-white">{faq.q}<span class="ml-4 text-xl text-slate-500 transition group-open:rotate-45">+</span></summary><p class="mt-3 text-sm leading-relaxed text-slate-400">{faq.a}</p></details>)}</div>
 </section>

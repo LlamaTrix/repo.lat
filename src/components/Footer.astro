@@ -1,56 +1,10 @@
 ---
 const year = new Date().getFullYear();
-
-const columns = [
-	{
-		title: "Producto",
-		links: [
-			{ label: "Características", href: "#caracteristicas" },
-			{ label: "Cómo funciona", href: "#como-funciona" },
-			{ label: "Preguntas frecuentes", href: "#preguntas" },
-		],
-	},
-	{
-		title: "Comunidad",
-		links: [
-			{ label: "Código en GitHub", href: "https://github.com/LlamaTrix/repo.lat" },
-			{ label: "Reportar un problema", href: "https://github.com/LlamaTrix/repo.lat/issues" },
-			{ label: "Contribuir", href: "https://github.com/LlamaTrix/repo.lat/pulls" },
-		],
-	},
-];
 ---
-
-<footer class="border-t border-white/5 px-6 py-14">
-	<div class="mx-auto grid max-w-6xl gap-10 sm:grid-cols-[1.5fr_1fr_1fr]">
-		<div>
-			<p class="flex items-center gap-2 text-lg font-bold text-white">
-				<span class="text-emerald-400">&lt;/&gt;</span>
-				repo<span class="text-fuchsia-400">.lat</span>
-			</p>
-			<p class="mt-3 max-w-xs text-sm text-slate-400">
-				Perfiles de desarrollador conectados a GitHub, con HTML 100% personalizable.
-				Open source, hecho por la comunidad de Latinoamérica.
-			</p>
-		</div>
-
-		{columns.map((col) => (
-			<div>
-				<h4 class="mb-3 text-sm font-semibold text-white">{col.title}</h4>
-				<ul class="space-y-2">
-					{col.links.map((link) => (
-						<li>
-							<a href={link.href} class="text-sm text-slate-400 transition hover:text-white">
-								{link.label}
-							</a>
-						</li>
-					))}
-				</ul>
-			</div>
-		))}
+<footer class="border-t border-white/5 px-6 py-12">
+	<div class="mx-auto flex max-w-6xl flex-col justify-between gap-8 sm:flex-row">
+		<div><p class="text-lg font-bold text-white"><span class="text-emerald-300">&lt;/&gt;</span> repo<span class="text-fuchsia-400">.lat</span></p><p class="mt-3 max-w-sm text-sm leading-relaxed text-slate-500">Un lugar para contar tu trabajo con más contexto, más personalidad y menos ruido.</p></div>
+		<div class="flex gap-6 text-sm text-slate-400"><a href="#perfiles" class="hover:text-white">Perfiles</a><a href="#preguntas" class="hover:text-white">Preguntas</a><a href="https://github.com/LlamaTrix/repo.lat" class="hover:text-white">GitHub</a></div>
 	</div>
-
-	<div class="mx-auto mt-10 max-w-6xl border-t border-white/5 pt-6 text-center text-sm text-slate-500">
-		Hecho con 💚 por la comunidad LATAM · {year}
-	</div>
+	<p class="mx-auto mt-10 max-w-6xl border-t border-white/5 pt-6 text-xs text-slate-600">Construido en comunidad desde Latinoamérica · {year}</p>
 </footer>

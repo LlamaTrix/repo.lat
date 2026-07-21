@@ -1,20 +1,14 @@
 ---
+import { getImage } from "astro:assets";
+import heroProfiles from "../assets/images/hero-profiles.png";
+
 import "../styles/global.css";
-
-interface Props {
-	title?: string;
-	description?: string;
-}
-
-const {
-	title = "repo.lat — Tu perfil de dev, hecho por LATAM",
-	description = "Conecta tu cuenta de GitHub, genera un perfil de programador compartible y personaliza su HTML como quieras. Open source, hecho por y para la comunidad de desarrolladores de Latinoamérica.",
-} = Astro.props;
-
+interface Props { title?: string; description?: string; }
+const { title = "repo.lat — Tu trabajo merece una página propia", description = "Convierte tu actividad de GitHub en un perfil personalizable, abierto y hecho desde Latinoamérica." } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL("/og-image.png", Astro.site);
+const ogImageAsset = await getImage({ src: heroProfiles, width: 1200, format: "png" });
+const ogImage = new URL(ogImageAsset.src, Astro.site);
 ---
-
 <!doctype html>
 <html lang="es">
 	<head>
@@ -22,27 +16,9 @@ const ogImage = new URL("/og-image.png", Astro.site);
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-
-		<title>{title}</title>
-		<meta name="description" content={description} />
-		<link rel="canonical" href={canonicalURL} />
-
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={canonicalURL} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImage} />
-		<meta property="og:locale" content="es_LA" />
-
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:url" content={canonicalURL} />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={ogImage} />
-
+		<title>{title}</title><meta name="description" content={description} /><link rel="canonical" href={canonicalURL} />
+		<meta property="og:type" content="website" /><meta property="og:url" content={canonicalURL} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:image" content={ogImage} /><meta property="og:locale" content="es_LA" />
+		<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={ogImage} />
 		<meta name="theme-color" content="#0a0a12" />
-	</head>
-	<body>
-		<slot />
-	</body>
+	</head><body><slot /></body>
 </html>
